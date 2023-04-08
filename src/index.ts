@@ -3,7 +3,7 @@ import puppeteer, { Page } from "puppeteer";
 class ExplodingTopicsScraper {
   protected static baseUrl = "https://explodingtopics.com/topics-last-6-months";
 
-  public static async getTopics(pageNumber: number): Promise<string[]> {
+  public static async getTopics(pageNumber = 1): Promise<string[]> {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
