@@ -1,6 +1,6 @@
 import puppeteer, { Page } from "puppeteer";
 
-export default class ExplodingTopicsScraper {
+export class ExplodingTopicsScraper {
   protected static baseUrl = "https://explodingtopics.com/topics-last-6-months";
 
   public static async getTopics(pageNumber = 1): Promise<string[]> {
