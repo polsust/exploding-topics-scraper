@@ -9,9 +9,9 @@ class ExplodingTopicsScraper {
 
     await page.goto(`${this.baseUrl}?page=${pageNumber}`);
 
-    const keywordElements = await page.$$(".tileKeyword");
+    const keywordContainers = await page.$$(".tileInnerContainer");
 
-    if (keywordElements.length == 0) {
+    if (keywordContainers.length == 0) {
       await this.pageExsistsOrError(page, pageNumber);
       throw new Error(
         `An error occurred while reading page: ${pageNumber} content`
@@ -20,12 +20,22 @@ class ExplodingTopicsScraper {
 
     const keywords: string[] = [];
 
-    for (const keywordElement of keywordElements) {
-      const text = await (
-        await keywordElement.getProperty("textContent")
-      ).jsonValue();
+    for (const keywordContainer of keywordContainers) {
+      const keywordContainerClasses = await keywordContainer.evaluate((el) => [
+        ...el.classList,
+      ]);
+      const isPremium = keywordContainerClasses.includes("proTopicTileBlur");
+      if (isPremium) continue;
 
-      if (text) keywords.push(text);
+      const keywordElement = await keywordContainer.$(".tileKeyword");
+
+      if (keywordElement) {
+        const text = await (
+          await keywordElement.getProperty("textContent")
+        ).jsonValue();
+
+        if (text) keywords.push(text);
+      }
     }
 
     browser.close();
