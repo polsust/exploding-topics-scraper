@@ -21,9 +21,8 @@ export class ExplodingTopicsScraper {
     const keywords: string[] = [];
 
     for (const keywordContainer of keywordContainers) {
-      const keywordContainerClasses = await keywordContainer.evaluate((el) => [
-        ...el.classList,
-      ]);
+      const keywordContainerClasses = await (await keywordContainer.getProperty("className")).jsonValue();
+
       const isPremium = keywordContainerClasses.includes("proTopicTileBlur");
       if (isPremium) continue;
 
