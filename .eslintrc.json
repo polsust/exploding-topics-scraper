@@ -15,5 +15,8 @@
   },
   "plugins": [
     "@typescript-eslint"
-  ]
+  ],
+  "rules": {
+    "no-constant-condition": "off"
+  }
 }
