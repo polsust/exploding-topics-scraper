@@ -11,7 +11,8 @@
   ],
   "author": "Pol Sust",
   "scripts": {
-    "build": "npx tsc"
+    "build": "npx tsc",
+    "dev": "tsx watch src/index.ts"
   },
   "devDependencies": {
     "@types/node": "^18.15.10",
