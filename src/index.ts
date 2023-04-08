@@ -14,7 +14,7 @@ class ExplodingTopicsScraper {
     if (keywordContainers.length == 0) {
       await this.pageExsistsOrError(page, pageNumber);
       throw new Error(
-        `An error occurred while reading page: ${pageNumber} content`
+        `An error occurred while reading page's ${pageNumber} content`
       );
     }
 
@@ -58,7 +58,7 @@ class ExplodingTopicsScraper {
       const text = await (await h2.getProperty("innerText")).jsonValue();
 
       if (text === searchText) {
-        throw new Error(`The page ${pageNumber} does not exist`);
+        throw new Error(`Page ${pageNumber} does not exist`);
       }
     }
   }
