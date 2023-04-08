@@ -1,6 +1,6 @@
 import puppeteer, { Page } from "puppeteer";
 
-class ExplodingTopicsScraper {
+export default class ExplodingTopicsScraper {
   protected static baseUrl = "https://explodingtopics.com/topics-last-6-months";
 
   public static async getTopics(pageNumber = 1): Promise<string[]> {
@@ -63,11 +63,3 @@ class ExplodingTopicsScraper {
     }
   }
 }
-
-(async () => {
-  let page = 1;
-  while (true) {
-    console.log(await ExplodingTopicsScraper.getTopics(page));
-    page++;
-  }
-})();
