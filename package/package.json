@@ -12,7 +12,8 @@
   "author": "Pol Sust",
   "scripts": {
     "build": "npx tsc",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@types/node": "^18.15.10",
