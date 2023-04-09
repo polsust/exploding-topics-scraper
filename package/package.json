@@ -1,6 +1,6 @@
 {
   "name": "exploding-topics-scraper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "lib/index.js",
   "license": "MIT",
   "description": "A web scraper for explodingtopics.com",
