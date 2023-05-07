@@ -1,10 +1,13 @@
-import puppeteer, { Page } from "puppeteer";
+import puppeteer, { Page, PuppeteerLaunchOptions } from "puppeteer";
 
 export class ExplodingTopicsScraper {
   protected static baseUrl = "https://explodingtopics.com/topics-last-6-months";
 
-  public static async getTopics(pageNumber = 1): Promise<string[]> {
-    const browser = await puppeteer.launch();
+  public static async getTopics(
+    pageNumber = 1,
+    puppeteerConfig?: PuppeteerLaunchOptions
+  ): Promise<string[]> {
+    const browser = await puppeteer.launch(puppeteerConfig);
     const page = await browser.newPage();
 
     await page.goto(`${this.baseUrl}?page=${pageNumber}`);
@@ -21,7 +24,9 @@ export class ExplodingTopicsScraper {
     const keywords: string[] = [];
 
     for (const keywordContainer of keywordContainers) {
-      const keywordContainerClasses = await (await keywordContainer.getProperty("className")).jsonValue();
+      const keywordContainerClasses = await (
+        await keywordContainer.getProperty("className")
+      ).jsonValue();
 
       const isPremium = keywordContainerClasses.includes("proTopicTileBlur");
       if (isPremium) continue;
